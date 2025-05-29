@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming {{ sport_name }} Matches</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden; /* To contain the background animation */
+        }
+
+        /* Background Animation */
+        @keyframes wave {
+            0% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-20px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.6; }
+        }
+
+        .wave {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%; /* Increased width for continuous effect */
+            height: 150px;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            opacity: 0.7;
+            animation: wave 5s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+            z-index: -1;
+            border-radius: 0 0 50% 50%;
+            transform: translateX(-50%); /* Center the starting point */
+        }
+
+        .wave:nth-child(2) {
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            animation-delay: -2.5s;
+            opacity: 0.5;
+            height: 180px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .match-table {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+            overflow: hidden; /* For rounded corners on the table */
+            width: 90%;
+            max-width: 900px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            padding: 20px 0;
+            margin: 0;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #3498db; /* Blue header */
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Light grey for even rows */
+        }
+
+        tr:hover {
+            background-color: #e6f7ff; /* Light blue on hover */
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .no-matches {
+            text-align: center;
+            color: #777;
+            padding: 30px;
+            font-style: italic;
+        }
+
+        .team-names {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .match-time {
+            color: #555;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="wave"></div>
+    <div class="wave:nth-child(2)"></div>
+    <div class="container">
+        <div class="match-table">
+            <h1>Upcoming {{ sport_name }} Matches</h1>
+            {% if matches %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Match</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for match in matches %}
+                            <tr>
+                                <td><span class="team-names">{{ match.home_team }} vs {{ match.away_team }}</span></td>
+                                <td>{{ match.date_time.split(' ')[0] }}</td>
+                                <td>{{ match.date_time.split(' ')[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-matches">No upcoming matches found at this time. Please check back later!</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

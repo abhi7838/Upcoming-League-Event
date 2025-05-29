@@ -6,31 +6,50 @@
     <title>Upcoming {{ sport_name }} Matches</title>
     <style>
         /* Basic inline CSS for immediate visual feedback. For larger projects, use external CSS. */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f0f2f5; color: #333; line-height: 1.6; }
-        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
-       .match-list { background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto; }
-       .match-item { border-bottom: 1px solid #e0e0e0; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-       .match-item:last-child { border-bottom: none; }
-       .team-names { font-weight: bold; font-size: 1.2em; color: #34495e; flex: 2; min-width: 200px; }
-       .match-time { color: #7f8c8d; font-size: 0.95em; flex: 1; text-align: right; min-width: 150px; }
-       .no-matches { text-align: center; color: #95a5a6; padding: 30px; font-style: italic; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color:#F8F9FA; color: #333; line-height: 1.6; }
+        h1 { color:rgb(219, 90, 25); text-align: center; margin-bottom: 30px; }
+        {% comment %} .match-list { background-color:rgb(92, 158, 208); padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto; } {% endcomment %}
+        .match-list { background-color: #FFFFFF; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto; border: 5px solidrgb(201, 91, 12); }
+        .match-item { border-bottom: 1px solid #e0e0e0; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .match-item:last-child { border-bottom: none; }
+        .team-names { font-weight: bold; font-size: 1.2em; color:rgb(219, 90, 25); flex: 2; min-width: 200px; }
+        .match-time { font-weight: bold; color:rgb(219, 90, 25); font-size: 1.2em.em; flex: 1; text-align: right; min-width: 150px; }
+        .no-matches { text-align: center; color: #95a5a6; padding: 30px; font-style: italic; }
+
+
+        .diamond-pattern {
+          background-color: #e0e0eb; /* Light background color */
+          background-image:
+            linear-gradient(45deg,rgb(229, 195, 151) 25%, transparent 25%, transparent 75%,rgb(229, 195, 151) 75%,rgb(229, 195, 151)),
+            linear-gradient(-45deg,rgb(229, 195, 151) 25%, transparent 25%, transparent 75%,rgb(229, 195, 151) 75%,rgb(229, 195, 151));
+          background-size: 10px 10px; /* Adjust size for larger/smaller diamonds */
+          background-position: 0 0;
+        }
+
+        body {
+          /* ... other body styles ... */
+          background-color: #e0e0eb; /* Light background color */
+          background-image:
+            linear-gradient(45deg,rgb(229, 195, 151) 25%, transparent 25%, transparent 75%,rgb(229, 195, 151) 75%,rgb(229, 195, 151)),
+            linear-gradient(-45deg,rgb(229, 195, 151) 25%, transparent 25%, transparent 75%,rgb(229, 195, 151) 75%,rgb(229, 195, 151));
+          background-size: 10px 10px; /* Adjust size for larger/smaller diamonds */
+          background-position: 0 0;
+          background-repeat: repeat; /* To tile the pattern across the page */
+        }
     </style>
+
 </head>
 <body>
     <h1>Upcoming {{ sport_name }} Matches</h1>
     <div class="match-list">
-        {# Check if the 'matches' list is not empty before looping #}
         {% if matches %}
-            {# Loop through each 'match' dictionary in the 'matches' list [21, 22] #}
             {% for match in matches %}
                 <div class="match-item">
-                    {# Access dictionary values using dot notation #}
                     <span class="team-names">{{ match.home_team }} vs {{ match.away_team }}</span>
                     <span class="match-time">{{ match.date_time }}</span>
                 </div>
             {% endfor %}
         {% else %}
-            {# Display a message if no matches are found #}
             <p class="no-matches">No upcoming matches found at this time. Please check back later!</p>
         {% endif %}
     </div>
