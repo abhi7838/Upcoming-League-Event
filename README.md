@@ -1,0 +1,2 @@
+# Upcoming-League-Event-
+This project involves creating a basic web page that displays a list of upcoming basketball matches. The match data, including team names and scheduled date/time, is fetched from a publicly available sports API.
