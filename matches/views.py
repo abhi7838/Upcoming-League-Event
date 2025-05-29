@@ -9,10 +9,9 @@ def upcoming_matches_view(request):
 
     # api_key = os.environ.get('SPORTSDB_API_KEY', '1')
     api_key = '123'
-    print('haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     # Choose a league ID (e.g., 4328 for English Premier League Soccer, 4387 for NBA Basketball)
     league_id = '4387' # Defaulting to Soccer: English Premier League
-    sport_name = 'Soccer' # Default sport name for display
+    sport_name = 'Basketball' # Default sport name for display
 
     # Construct the API URL
     api_url = f"https://www.thesportsdb.com/api/v1/json/{api_key}/eventsnextleague.php?id={league_id}"
@@ -46,7 +45,6 @@ def upcoming_matches_view(request):
                     display_datetime = dt_obj.strftime("%A, %B %d, %Y at %I:%M %p")
                 
                 except ValueError as e:
-                    print('hbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
                     print(f"Warning: Could not parse date/time for event {home_team} vs {away_team}: {e}")
                     #  unformatted string if parsing fails
 
