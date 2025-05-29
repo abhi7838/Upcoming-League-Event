@@ -15,6 +15,7 @@ def upcoming_matches_view(request):
 
     # Construct the API URL
     api_url = f"https://www.thesportsdb.com/api/v1/json/{api_key}/eventsnextleague.php?id={league_id}"
+    print(api_url)
     
 
     matches_data = [] 
